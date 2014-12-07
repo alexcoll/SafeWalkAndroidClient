@@ -2,11 +2,11 @@ package edu.purdue.YL;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -19,6 +19,8 @@ import android.widget.Spinner;
  */
 public class ClientFragment extends Fragment implements OnClickListener {
 
+	private static final String DEBUG_TAG = "DEBUG";
+	
 	// UI elements
 	private EditText name;
 	private RadioGroup preferences;
@@ -54,7 +56,7 @@ public class ClientFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		System.out.println("ClientFragment.onCreateView(): called");
+		Log.d(DEBUG_TAG, "ClientFragment.onCreateView(): called");
 		if (container == null) {
 			return null;
 		}
@@ -80,15 +82,13 @@ public class ClientFragment extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * 
-	 * @param defaultVal
 	 * @return name provided by user
 	 */
 	public String getName() {
 		if (this.name != null) {
 			return this.name.getText().toString();
 		} else {
-			return null;
+			return "";
 		}
 	}
 
@@ -119,12 +119,12 @@ public class ClientFragment extends Fragment implements OnClickListener {
 			return 0;
 		}
 	}
-	
-	public String getFrom(){
+
+	public String getFrom() {
 		return this.from.getSelectedItem().toString();
 	}
-	
-	public String getTo(){
+
+	public String getTo() {
 		return this.to.getSelectedItem().toString();
 	}
 

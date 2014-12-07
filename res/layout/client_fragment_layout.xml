@@ -66,21 +66,21 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:checked="true"
-            android:text="I am a requester. Match me with volunteers only." />
+            android:text="@string/client_pref_1" />
 
         <RadioButton
             android:id="@+id/radio1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="I am a volunteer. Don&apos;t match me with another volunteer." />
+            android:text="@string/client_pref_2" />
 
         <RadioButton
             android:id="@+id/radio2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="I have no prefeence being a requester or a volunteer." />
+            android:text="@string/client_pref_3" />
     </RadioGroup>
 
     <TextView
@@ -90,7 +90,7 @@
         android:layout_below="@+id/PreferencesRadioGroup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="From"
+        android:text="@string/from"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner
@@ -102,19 +102,19 @@
         android:entries="@array/from_locations" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/matchTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fromSpinner"
         android:layout_centerHorizontal="true"
-        android:text="To"
+        android:text="@string/to"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner
         android:id="@+id/toSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/matchTextView"
         android:layout_centerHorizontal="true"
         android:entries="@array/to_locations" />
 

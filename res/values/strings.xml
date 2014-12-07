@@ -11,6 +11,12 @@
     <string name="default_command">:FAKE_COMMAND</string>
     <string name="host">Host</string>
     <string name="port">Port</string>
+    <string name="partner">Partner</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="client_pref_1">I am a requester. Match me with volunteers only.</string>
+    <string name="client_pref_2">I am a volunteer. Don&apos;t match me with another volunteer.</string>
+    <string name="client_pref_3">I have no prefeence being a requester or a volunteer.</string>
     <string-array name="from_locations">
         <item>CL50</item>
         <item>EE</item>

@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements SubmitCallbackListener,
 		StartOverCallbackListener {
+
+	private static final String DEBUG_TAG = "DEBUG";
 
 	/**
 	 * The ClientFragment used by the activity.
@@ -117,24 +120,24 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 	@Override
 	public void onSubmit() {
 		System.out.println("MainActivity.onSubmit() called");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): called");
 		// Client info
-		System.out.println("MainActivity.onSubmit(): Getting client info");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Getting client info");
 		String name = this.clientFragment.getName();
 		int type = this.clientFragment.getType();
 		String from = this.clientFragment.getFrom();
 		String to = this.clientFragment.getTo();
 
 		// Server info
-		System.out.println("MainActivity.onSubmit(): Getting server info");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Getting server info");
 		String host = this.serverFragment.getHost(getResources().getString(
 				R.string.default_host));
 		int port = this.serverFragment.getPort(Integer.parseInt(getResources()
 				.getString(R.string.default_port)));
 		// Sanity check
-		System.out
-				.println("MainActivity.onSubmit(): Performing sanity check on user input");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Performing sanity check on user input");
 		// Client stuff
-		System.out.println("MainActivity.onSubmit(): Checking client input");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Checking client input");
 		if (name == null || name.equals("")) {
 			invalidForms("Name is empty");
 		} else if (name.contains(",")) {
@@ -158,7 +161,7 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 		}
 
 		// Server stuff
-		System.out.println("MainActivity.onSubmit(): Checking server input");
+		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Checking server input");
 		if (host.equals(null)) {
 			invalidForms("Host is empty");
 		} else if (host.contains(" ")) {

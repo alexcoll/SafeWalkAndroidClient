@@ -1,6 +1,12 @@
 package edu.purdue.YL;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Calendar;
 
 import android.app.Fragment;
 import android.os.AsyncTask;
@@ -47,6 +53,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 	private TextView partnerTextView;
 	private TextView fromTextView;
 	private TextView toTextView;
+	private TextView matchTextView;
 
 	// Class methods
 	/**
@@ -99,9 +106,11 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		view.findViewById(R.id.bu_start_over).setOnClickListener(this);
 
 		this.logTextView = (TextView) view.findViewById(R.id.tv_log);
-		this.partnerTextView = (TextView) view.findViewById(R.id.tv_partner_name);
+		this.partnerTextView = (TextView) view
+				.findViewById(R.id.tv_partner_name);
 		this.fromTextView = (TextView) view.findViewById(R.id.tv_from);
 		this.toTextView = (TextView) view.findViewById(R.id.tv_to);
+		this.matchTextView = (TextView) view.findViewById(R.id.tv_match1);
 
 		/**
 		 * Launch the AsyncTask
@@ -143,20 +152,47 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		protected String doInBackground(String... params) {
 
-			/**
-			 * TODO: Your Client code here.
-			 */
-			Log.d(DEBUG_TAG, String
-					.format("The Server at the address %s uses the port %d",
-							host, port));
+			String result = null;
+			Socket s;
+			// try {
+			// s = new Socket(host, port);
+			// publishProgress("Connected to server", host,
+			// Integer.toString(port));
+			// PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+			//
+			// BufferedReader in = new BufferedReader(new InputStreamReader(
+			// s.getInputStream()));
+			// Log.d(DEBUG_TAG, String.format(
+			// "The Server at the address %s uses the port %d", host,
+			// port));
+			// Log.d(DEBUG_TAG, String.format(
+			// "The Client will send the command: %s", command));
+			//
+			// // Send the command/message
+			// out.println(command);
+			// publishProgress("Command sent to server", command);
+			// for (;;) {
+			// result = in.readLine();
+			// if (result.startsWith("RESPONSE: ")) {
+			// out.println(":ACK");
+			// publishProgress("Response recieved");
+			// }
+			// break;
+			// }
+			// in.close();
+			// out.close();
+			//
+			// s.close();
+			//
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 
-			Log.d(DEBUG_TAG, String.format(
-					"The Client will send the command: %s", command));
-
-			return "";
+			return "test done";
 		}
+
 		public void close() {
-                    // TODO: Clean up the client
+			// TODO: Clean up the client
 		}
 
 		/**
@@ -172,6 +208,12 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPreExecute() {
+			logTextView.setText(String.format("[%s] Valided form data\n",
+					Calendar.getInstance().getTime()));
+
+			partnerTextView.setText("");
+			fromTextView.setText("");
+			toTextView.setText("");
 		}
 
 		/**
@@ -179,6 +221,12 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPostExecute(String result) {
+			if (result.contains("MATCH")) {
+				partnerTextView.setText(result);
+				fromTextView.setText(result);
+				toTextView.setText(result);
+			}
+
 		}
 
 		/**
@@ -187,6 +235,18 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onProgressUpdate(String... result) {
+			if (result[0].equals("Connected to server")) {
+				logTextView.append(String.format("[%s] Connected to server\n",
+						Calendar.getInstance().getTime()));
+			} else if (result[0].equals("Command sent to server")) {
+				String command = result[1];
+				logTextView.append(String.format(
+						"[%s] Commnad \"%s\" sent to server\n", Calendar
+								.getInstance().getTime(), command));
+			} else if (result[0].equals("Response recieved")) {
+				logTextView.append(String.format("[%s] Response recieved\n",
+						Calendar.getInstance().getTime()));
+			}
 		}
 	}
 
