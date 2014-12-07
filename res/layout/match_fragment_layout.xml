@@ -110,13 +110,12 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/tv_match1"
+        android:id="@+id/tv_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tableRow1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:text="ttt"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

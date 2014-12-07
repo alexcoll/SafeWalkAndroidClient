@@ -54,32 +54,34 @@ public final class R {
         public static final int bu_left=0x7f0a0000;
         public static final int bu_right=0x7f0a0002;
         public static final int bu_start_over=0x7f0a0010;
-        public static final int et_host=0x7f0a001b;
-        public static final int et_port=0x7f0a001d;
+        public static final int et_host=0x7f0a001d;
+        public static final int et_port=0x7f0a001f;
         public static final int fl_main=0x7f0a0003;
         public static final int fromSpinner=0x7f0a000d;
+        public static final int fromTableRow=0x7f0a0017;
         public static final int logView=0x7f0a0005;
+        public static final int matchTextView=0x7f0a000e;
         public static final int nameText=0x7f0a0006;
+        public static final int partnerTableRow=0x7f0a0014;
         public static final int radio0=0x7f0a0009;
         public static final int radio1=0x7f0a000a;
         public static final int radio2=0x7f0a000b;
         public static final int submitButton=0x7f0a0004;
-        public static final int tableLayout1=0x7f0a0012;
-        public static final int tableRow1=0x7f0a0013;
-        public static final int tableRow2=0x7f0a0016;
-        public static final int tableRow3=0x7f0a0018;
-        public static final int textView1=0x7f0a0014;
+        public static final int tableLayout1=0x7f0a0013;
+        public static final int tableRow1=0x7f0a0012;
+        public static final int textView1=0x7f0a0015;
         public static final int textView2=0x7f0a0007;
         public static final int textView3=0x7f0a000c;
-        public static final int textView4=0x7f0a000e;
         public static final int toSpinner=0x7f0a000f;
-        public static final int tv_from=0x7f0a0017;
-        public static final int tv_host=0x7f0a001a;
+        public static final int toTableRow=0x7f0a0019;
+        public static final int tv_from=0x7f0a0018;
+        public static final int tv_host=0x7f0a001c;
         public static final int tv_log=0x7f0a0011;
-        public static final int tv_partner_name=0x7f0a0015;
-        public static final int tv_port=0x7f0a001c;
+        public static final int tv_match=0x7f0a001b;
+        public static final int tv_partner_name=0x7f0a0016;
+        public static final int tv_port=0x7f0a001e;
         public static final int tv_title=0x7f0a0001;
-        public static final int tv_to=0x7f0a0019;
+        public static final int tv_to=0x7f0a001a;
     }
     public static final class layout {
         public static final int action_bar=0x7f030000;
@@ -94,6 +96,9 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int client=0x7f060002;
+        public static final int client_pref_1=0x7f06000e;
+        public static final int client_pref_2=0x7f06000f;
+        public static final int client_pref_3=0x7f060010;
         public static final int default_command=0x7f060008;
         public static final int default_host=0x7f060006;
         public static final int default_port=0x7f060007;

@@ -3,7 +3,9 @@ package edu.purdue.YL;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -110,8 +112,11 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 	}
 
 	public void invalidForms(String errMsg) {
-		// TODO Pop-up alert dialog
-		System.out.println("ERROR: " + errMsg);
+		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		alertDialog.setTitle("Error");
+		alertDialog.setMessage(errMsg);
+		alertDialog.show();
+		Log.d(DEBUG_TAG, String.format("ERROR: %s", errMsg));
 	}
 
 	/**
@@ -135,40 +140,52 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 		int port = this.serverFragment.getPort(Integer.parseInt(getResources()
 				.getString(R.string.default_port)));
 		// Sanity check
-		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Performing sanity check on user input");
+		Log.d(DEBUG_TAG,
+				"MainActivity.onSubmit(): Performing sanity check on user input");
 		// Client stuff
 		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Checking client input");
 		if (name == null || name.equals("")) {
 			invalidForms("Name is empty");
+			return;
 		} else if (name.contains(",")) {
 			invalidForms("Name contains a comma");
+			return;
 		}
 		if (from == null) {
 			invalidForms("From is empty");
+			return;
 		} else if (from.equals("*")) {
 			invalidForms("From is *");
+			return;
 		}
 		if (to == null) {
 			invalidForms("To is empty");
+			return;
 		} else if (to.equals(from)) {
 			invalidForms("To is the same as From");
+			return;
 		}
 		if (type != 0 && type != 1 && type != 2) {
 			invalidForms("Type is not an accepted type");
+			return;
 		}
 		if (to.equals("*") && type != 2) {
 			invalidForms("If the user uses *, his or her TYPE must be 2");
+			return;
 		}
 
 		// Server stuff
 		Log.d(DEBUG_TAG, "MainActivity.onSubmit(): Checking server input");
 		if (host.equals(null)) {
 			invalidForms("Host is empty");
+			return;
 		} else if (host.contains(" ")) {
 			invalidForms("Host contains space(s)");
+			return;
 		}
 		if (port < 1 || port > 65535) {
 			invalidForms("Port should be an integer value of range [1, 65535]");
+			return;
 		}
 		// TODO: Need to get command from client fragment
 		String command = this.getResources()

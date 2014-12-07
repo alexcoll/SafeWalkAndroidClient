@@ -110,7 +110,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				.findViewById(R.id.tv_partner_name);
 		this.fromTextView = (TextView) view.findViewById(R.id.tv_from);
 		this.toTextView = (TextView) view.findViewById(R.id.tv_to);
-		this.matchTextView = (TextView) view.findViewById(R.id.tv_match1);
+		this.matchTextView = (TextView) view.findViewById(R.id.tv_match);
 
 		/**
 		 * Launch the AsyncTask
@@ -152,43 +152,53 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		protected String doInBackground(String... params) {
 
+			String response = null;
 			String result = null;
 			Socket s;
-			// try {
-			// s = new Socket(host, port);
-			// publishProgress("Connected to server", host,
-			// Integer.toString(port));
-			// PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-			//
-			// BufferedReader in = new BufferedReader(new InputStreamReader(
-			// s.getInputStream()));
-			// Log.d(DEBUG_TAG, String.format(
-			// "The Server at the address %s uses the port %d", host,
-			// port));
-			// Log.d(DEBUG_TAG, String.format(
-			// "The Client will send the command: %s", command));
-			//
-			// // Send the command/message
-			// out.println(command);
-			// publishProgress("Command sent to server", command);
-			// for (;;) {
-			// result = in.readLine();
-			// if (result.startsWith("RESPONSE: ")) {
-			// out.println(":ACK");
-			// publishProgress("Response recieved");
-			// }
-			// break;
-			// }
-			// in.close();
-			// out.close();
-			//
-			// s.close();
-			//
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
+			try {
+				s = new Socket(host, port);
+				publishProgress("Connected to server", host,
+						Integer.toString(port));
+				PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
-			return "test done";
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						s.getInputStream()));
+				Log.d(DEBUG_TAG, String.format(
+						"The Server at the address %s uses the port %d", host,
+						port));
+				Log.d(DEBUG_TAG, String.format(
+						"The Client will send the command: %s", command));
+
+				// Send the command/message
+				out.println(command);
+				publishProgress("Command sent to server", command);
+				for (;;) {
+					response = in.readLine();
+					if (response.startsWith("RESPONSE: ")) {
+						out.println(":ACK");
+						publishProgress("Response recieved");
+						// Parse response
+						result = response.split(" ")[1];
+
+					} else if (response.startsWith("ERROR")) {
+						publishProgress("Lost connection");
+						in.close();
+						out.close();
+						s.close();
+						return "ERROR";
+					}
+					break;
+				}
+				in.close();
+				out.close();
+
+				s.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return result;
 		}
 
 		public void close() {
@@ -214,6 +224,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			partnerTextView.setText("");
 			fromTextView.setText("");
 			toTextView.setText("");
+			matchTextView.setText("");
 		}
 
 		/**
@@ -221,10 +232,17 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPostExecute(String result) {
-			if (result.contains("MATCH")) {
-				partnerTextView.setText(result);
-				fromTextView.setText(result);
-				toTextView.setText(result);
+			if (result != null) {
+				String[] response = result.split(",");
+				if (response.length == 4) {
+					partnerTextView.setText(response[0]);
+					fromTextView.setText(response[1]);
+					toTextView.setText(response[2]);
+				} else {
+					partnerTextView.setText("fake_response");
+					fromTextView.setText("fake_response");
+					toTextView.setText("fake_response");
+				}
 			}
 
 		}
@@ -236,16 +254,34 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		@Override
 		protected void onProgressUpdate(String... result) {
 			if (result[0].equals("Connected to server")) {
-				logTextView.append(String.format("[%s] Connected to server\n",
-						Calendar.getInstance().getTime()));
+				String logText = String.format("[%s] Connected to server\n",
+						Calendar.getInstance().getTime());
+				logTextView.append(logText);
+				Log.d(DEBUG_TAG, logText);
 			} else if (result[0].equals("Command sent to server")) {
-				String command = result[1];
-				logTextView.append(String.format(
-						"[%s] Commnad \"%s\" sent to server\n", Calendar
-								.getInstance().getTime(), command));
+				String[] command = result[1].split(",");
+				String logText = null;
+				if (command.length ==4){
+				logText = String
+						.format("[%s] Request sent to server with name %s, from %s to, with a prefercen %s\n",
+								Calendar.getInstance().getTime(), command[0],
+								command[1], command[2], command[3]);
+				} else {
+					logText = String
+							.format("[%s] Fake request sent to server\n", Calendar.getInstance().getTime());
+				}
+				logTextView.append(logText);
+				Log.d(DEBUG_TAG, logText);
 			} else if (result[0].equals("Response recieved")) {
-				logTextView.append(String.format("[%s] Response recieved\n",
-						Calendar.getInstance().getTime()));
+				String logText = String.format("[%s] Response recieved\n",
+						Calendar.getInstance().getTime());
+				logTextView.append(logText);
+				Log.d(DEBUG_TAG, logText);
+			} else if (result[0].equals("Lost connection")) {
+				String logText = String.format("[%s] Lost connection\n",
+						Calendar.getInstance().getTime());
+				logTextView.append(logText);
+				Log.d(DEBUG_TAG, logText);
 			}
 		}
 	}
