@@ -105,13 +105,14 @@ public class ClientFragment extends Fragment implements OnClickListener {
 	public int getType() {
 		// get the stuff
 		int selectedId = preferences.getCheckedRadioButtonId();
-		if (selectedId == 0) {
+		Log.d(DEBUG_TAG, "getType(): selectedId is " + selectedId);
+		if (selectedId == R.id.radio0) {
 			// Is requester
 			return 1;
-		} else if (selectedId == 1) {
+		} else if (selectedId == R.id.radio1) {
 			// Is volunteer
 			return 2;
-		} else if (selectedId == 2) {
+		} else if (selectedId == R.id.radio2) {
 			// No preference
 			return 0;
 		} else {

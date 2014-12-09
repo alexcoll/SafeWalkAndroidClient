@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Calendar;
+import java.util.Locale;
 
 import android.app.Fragment;
 import android.os.AsyncTask;
@@ -129,6 +130,7 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		/**
 		 * Close the AsyncTask if still running.
 		 */
+		this.client.cancel(true);
 		this.client.close();
 
 		/**
@@ -150,18 +152,23 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 * The system calls this to perform work in a worker thread and delivers
 		 * it the parameters given to AsyncTask.execute()
 		 */
+		Socket s;
+		PrintWriter out;
+		BufferedReader in;
+		boolean connected = false;
+
 		protected String doInBackground(String... params) {
 
 			String response = null;
 			String result = null;
-			Socket s;
 			try {
 				s = new Socket(host, port);
+				connected = true;
 				publishProgress("Connected to server", host,
 						Integer.toString(port));
-				PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+				out = new PrintWriter(s.getOutputStream(), true);
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(
+				in = new BufferedReader(new InputStreamReader(
 						s.getInputStream()));
 				Log.d(DEBUG_TAG, String.format(
 						"The Server at the address %s uses the port %d", host,
@@ -202,7 +209,14 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		}
 
 		public void close() {
-			// TODO: Clean up the client
+			if (connected) {
+				try {
+
+					s.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		/**
@@ -218,8 +232,12 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		 */
 		@Override
 		protected void onPreExecute() {
-			logTextView.setText(String.format("[%s] Valided form data\n",
-					Calendar.getInstance().getTime()));
+			logTextView.setText(String.format(
+					getString(R.string.prog_update_msg_7), Calendar
+							.getInstance().getTime()));
+			logTextView.setText(String.format(
+					getString(R.string.prog_update_msg_8), Calendar
+							.getInstance().getTime()));
 
 			partnerTextView.setText("");
 			fromTextView.setText("");
@@ -235,13 +253,19 @@ public class MatchFragment extends Fragment implements OnClickListener {
 			if (result != null) {
 				String[] response = result.split(",");
 				if (response.length == 4) {
+					String logText = String.format(
+							getString(R.string.prog_update_msg_6), Calendar
+									.getInstance().getTime(), response[0],
+							response[1], response[2]);
+					logTextView.append(logText);
+					Log.d(DEBUG_TAG, logText);
 					partnerTextView.setText(response[0]);
 					fromTextView.setText(response[1]);
 					toTextView.setText(response[2]);
+					matchTextView.setText(getString(R.string.match_found));
 				} else {
-					partnerTextView.setText("fake_response");
-					fromTextView.setText("fake_response");
-					toTextView.setText("fake_response");
+					matchTextView.setText(getString(R.string.error)
+							.toUpperCase(Locale.US));
 				}
 			}
 
@@ -254,32 +278,44 @@ public class MatchFragment extends Fragment implements OnClickListener {
 		@Override
 		protected void onProgressUpdate(String... result) {
 			if (result[0].equals("Connected to server")) {
-				String logText = String.format("[%s] Connected to server\n",
-						Calendar.getInstance().getTime());
+				String logText = String.format(
+						getString(R.string.prog_update_msg_1), Calendar
+								.getInstance().getTime(), result[1], result[2]);
 				logTextView.append(logText);
 				Log.d(DEBUG_TAG, logText);
 			} else if (result[0].equals("Command sent to server")) {
 				String[] command = result[1].split(",");
 				String logText = null;
-				if (command.length ==4){
-				logText = String
-						.format("[%s] Request sent to server with name %s, from %s to, with a prefercen %s\n",
-								Calendar.getInstance().getTime(), command[0],
-								command[1], command[2], command[3]);
+				if (command.length == 4) {
+					String prefercence = null;
+					if (command[3].equals("0")) {
+						prefercence = getString(R.string.volunteer);
+					} else if (command[3].equals("1")) {
+						prefercence = getString(R.string.requester);
+					} else if (command[3].equals("2")) {
+						prefercence = getString(R.string.no_preference);
+					}
+					logText = String.format(
+							getString(R.string.prog_update_msg_2), Calendar
+									.getInstance().getTime(), command[0],
+							command[1], command[2], prefercence);
 				} else {
-					logText = String
-							.format("[%s] Fake request sent to server\n", Calendar.getInstance().getTime());
+					logText = String.format(
+							getString(R.string.prog_update_msg_3), Calendar
+									.getInstance().getTime());
 				}
 				logTextView.append(logText);
 				Log.d(DEBUG_TAG, logText);
 			} else if (result[0].equals("Response recieved")) {
-				String logText = String.format("[%s] Response recieved\n",
-						Calendar.getInstance().getTime());
+				String logText = String.format(
+						getString(R.string.prog_update_msg_4), Calendar
+								.getInstance().getTime());
 				logTextView.append(logText);
 				Log.d(DEBUG_TAG, logText);
 			} else if (result[0].equals("Lost connection")) {
-				String logText = String.format("[%s] Lost connection\n",
-						Calendar.getInstance().getTime());
+				String logText = String.format(
+						getString(R.string.prog_update_msg_5), Calendar
+								.getInstance().getTime());
 				logTextView.append(logText);
 				Log.d(DEBUG_TAG, logText);
 			}

@@ -96,21 +96,43 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int client=0x7f060002;
-        public static final int client_pref_1=0x7f06000e;
-        public static final int client_pref_2=0x7f06000f;
-        public static final int client_pref_3=0x7f060010;
+        public static final int client_pref_1=0x7f060012;
+        public static final int client_pref_2=0x7f060013;
+        public static final int client_pref_3=0x7f060014;
         public static final int default_command=0x7f060008;
         public static final int default_host=0x7f060006;
         public static final int default_port=0x7f060007;
+        public static final int err_host=0x7f060025;
+        public static final int err_name_comma=0x7f060023;
+        public static final int err_name_empty=0x7f060022;
+        public static final int err_port=0x7f060026;
+        public static final int err_type=0x7f060024;
+        public static final int error=0x7f060019;
         public static final int from=0x7f06000c;
+        public static final int from_location=0x7f06000e;
         public static final int host=0x7f060009;
         public static final int match=0x7f060004;
+        public static final int match_found=0x7f060018;
+        public static final int name=0x7f060011;
+        public static final int no_preference=0x7f060017;
         public static final int partner=0x7f06000b;
         public static final int port=0x7f06000a;
+        public static final int preferences=0x7f060010;
+        public static final int prog_update_msg_1=0x7f06001a;
+        public static final int prog_update_msg_2=0x7f06001b;
+        public static final int prog_update_msg_3=0x7f06001c;
+        public static final int prog_update_msg_4=0x7f06001d;
+        public static final int prog_update_msg_5=0x7f06001e;
+        public static final int prog_update_msg_6=0x7f06001f;
+        public static final int prog_update_msg_7=0x7f060020;
+        public static final int prog_update_msg_8=0x7f060021;
+        public static final int requester=0x7f060015;
         public static final int server=0x7f060001;
         public static final int start_over=0x7f060005;
         public static final int submit=0x7f060003;
         public static final int to=0x7f06000d;
+        public static final int to_location=0x7f06000f;
+        public static final int volunteer=0x7f060016;
     }
     public static final class style {
         public static final int ActionBarButton=0x7f080003;

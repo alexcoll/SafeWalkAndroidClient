@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tableRow1"
         android:layout_alignStart="@+id/bu_start_over"
-        android:shrinkColumns="1" >
+        android:shrinkColumns="1"
+        android:background="@color/light_grey" >
 
         <TableRow
             android:id="@+id/partnerTableRow"

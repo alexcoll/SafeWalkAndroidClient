@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="9dp"
-        android:text="Name"
+        android:text="@string/name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -50,7 +50,7 @@
         android:layout_below="@+id/nameText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:text="Preferences"
+        android:text="@string/preferences"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <RadioGroup
@@ -64,7 +64,6 @@
             android:id="@+id/radio0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:checked="true"
             android:text="@string/client_pref_1" />
 
@@ -72,14 +71,12 @@
             android:id="@+id/radio1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="@string/client_pref_2" />
 
         <RadioButton
             android:id="@+id/radio2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="@string/client_pref_3" />
     </RadioGroup>
 
@@ -90,7 +87,7 @@
         android:layout_below="@+id/PreferencesRadioGroup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="@string/from"
+        android:text="@string/from_location"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner
@@ -107,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fromSpinner"
         android:layout_centerHorizontal="true"
-        android:text="@string/to"
+        android:text="@string/to_location"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner

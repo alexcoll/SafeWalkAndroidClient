@@ -14,9 +14,31 @@
     <string name="partner">Partner</string>
     <string name="from">From</string>
     <string name="to">To</string>
-    <string name="client_pref_1">I am a requester. Match me with volunteers only.</string>
-    <string name="client_pref_2">I am a volunteer. Don\'t match me with another volunteer.</string>
-    <string name="client_pref_3">I have no prefeence being a requester or a volunteer.</string>
+    <string name="from_location">From Location</string>
+    <string name="to_location">To Location</string>
+    <string name="preferences">Preferences</string>
+    <string name="name">Name</string>
+    <string name="client_pref_1">Requester</string>
+    <string name="client_pref_2">Volunteer</string>
+    <string name="client_pref_3">No preference</string>
+    <string name="requester">requester</string>
+    <string name="volunteer">volunteer</string>
+    <string name="no_preference">no preference</string>
+    <string name="match_found">Match found</string>
+    <string name="error">error</string>
+    <string name="prog_update_msg_1">[%1$s] Connected to server at %2$s:%3$s\n</string>
+    <string name="prog_update_msg_2">[%1$s] Request sent to server with name %2$s, from %3$s to %4$s, with a prefercence %5$s\n</string>
+    <string name="prog_update_msg_3">[%1$s] Something went wrong\n</string>
+    <string name="prog_update_msg_4">[%1$s] Response recieved\n</string>
+    <string name="prog_update_msg_5">[%1$s] Lost connection\n</string>
+    <string name="prog_update_msg_6">[%1$s] Match found, partner is %2$s, going from %3$s to %4$s\n</string>
+    <string name="prog_update_msg_7">[%1$s] Valided form data\n</string>
+    <string name="prog_update_msg_8">[%1$s] Attempting to connect to server\n</string>
+    <string name="err_name_empty">Name cannot be empty</string>
+    <string name="err_name_comma">Name cannot contain a comma</string>
+    <string name="err_type">If the user uses * as the to location, his or her TYPE must be a volunteer</string>
+    <string name="err_host">Host contains space(s)</string>
+    <string name="err_port">Port should be an integer value of range [1, 65535] inclusive</string>
     <string-array name="from_locations">
         <item>CL50</item>
         <item>EE</item>
