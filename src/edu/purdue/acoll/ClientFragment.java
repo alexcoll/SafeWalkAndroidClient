@@ -1,4 +1,4 @@
-package edu.purdue.YL;
+package edu.purdue.acoll;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -116,8 +116,7 @@ public class ClientFragment extends Fragment implements OnClickListener {
 			// No preference
 			return 0;
 		} else {
-			// Assume no preference
-			return 0;
+			return -1;
 		}
 	}
 

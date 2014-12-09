@@ -27,7 +27,7 @@
     <string name="match_found">Match found</string>
     <string name="error">error</string>
     <string name="prog_update_msg_1">[%1$s] Connected to server at %2$s:%3$s\n</string>
-    <string name="prog_update_msg_2">[%1$s] Request sent to server with name %2$s, from %3$s to %4$s, with a prefercence %5$s\n</string>
+    <string name="prog_update_msg_2">[%1$s] Request sent to server with name %2$s, from %3$s to %4$s, with a preference %5$s\n</string>
     <string name="prog_update_msg_3">[%1$s] Something went wrong\n</string>
     <string name="prog_update_msg_4">[%1$s] Response recieved\n</string>
     <string name="prog_update_msg_5">[%1$s] Lost connection\n</string>

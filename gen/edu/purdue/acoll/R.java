@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package edu.purdue.YL;
+package edu.purdue.acoll;
 
 public final class R {
     public static final class array {

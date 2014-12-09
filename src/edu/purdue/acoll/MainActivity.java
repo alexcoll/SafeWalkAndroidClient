@@ -1,4 +1,4 @@
-package edu.purdue.YL;
+package edu.purdue.acoll;
 
 import java.util.Locale;
 
@@ -148,26 +148,22 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 		} else if (name.contains(",")) {
 			invalidateForm(getString(R.string.err_name_comma));
 			return false;
-		}
-		if (from == null) {
+		} else if (from == null) {
 			invalidateForm("From is empty");
 			return false;
 		} else if (from.equals("*")) {
 			invalidateForm("From is *");
 			return false;
-		}
-		if (to == null) {
+		} else if (to == null) {
 			invalidateForm("To is empty");
 			return false;
 		} else if (to.equals(from)) {
 			invalidateForm("To is the same as From");
 			return false;
-		}
-		if (type != 0 && type != 1 && type != 2) {
+		} else if (type != 0 && type != 1 && type != 2) {
 			invalidateForm("Type is not an accepted type");
 			return false;
-		}
-		if (to.equals("*") && type != 2) {
+		} else if (to.equals("*") && type != 2) {
 			invalidateForm(getString(R.string.err_type));
 			return false;
 		}
@@ -179,8 +175,7 @@ public class MainActivity extends Activity implements SubmitCallbackListener,
 		} else if (host.contains(" ")) {
 			invalidateForm(getString(R.string.err_host));
 			return false;
-		}
-		if (port < 1 || port > 65535) {
+		} else if (port < 1 || port > 65535) {
 			invalidateForm(getString(R.string.err_port));
 			return false;
 		}

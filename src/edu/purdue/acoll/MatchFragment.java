@@ -1,4 +1,4 @@
-package edu.purdue.YL;
+package edu.purdue.acoll;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -287,18 +287,18 @@ public class MatchFragment extends Fragment implements OnClickListener {
 				String[] command = result[1].split(",");
 				String logText = null;
 				if (command.length == 4) {
-					String prefercence = null;
-					if (command[3].equals("0")) {
-						prefercence = getString(R.string.volunteer);
+					String preference = null;
+					if (command[3].equals("2")) {
+						preference = getString(R.string.volunteer);
 					} else if (command[3].equals("1")) {
-						prefercence = getString(R.string.requester);
-					} else if (command[3].equals("2")) {
-						prefercence = getString(R.string.no_preference);
+						preference = getString(R.string.requester);
+					} else if (command[3].equals("0")) {
+						preference = getString(R.string.no_preference);
 					}
 					logText = String.format(
 							getString(R.string.prog_update_msg_2), Calendar
 									.getInstance().getTime(), command[0],
-							command[1], command[2], prefercence);
+							command[1], command[2], preference);
 				} else {
 					logText = String.format(
 							getString(R.string.prog_update_msg_3), Calendar
